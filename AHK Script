@@ -1,0 +1,34 @@
+SetTitleMatchMode, 2
+Paused := false
+
+F2::
+    if (Paused) {
+        Paused := false
+        MsgBox Script Resumed
+        SetTimer, SendActions, -1
+    } else {
+        Paused := true
+        MsgBox Script Paused
+        SetTimer, SendActions, Off
+    }
+    return
+
+F9::
+    Toggle := !Toggle
+    if (Toggle) {
+        MsgBox Script Started
+        SetTimer, SendActions, 100
+    } else {
+        MsgBox Script Stopped
+        SetTimer, SendActions, Off
+    }
+    return
+
+SendActions:
+    ControlSend,,{Space down},ahk_exe Growtopia.exe
+    Sleep 2700
+    ControlSend,,{Space up},ahk_exe Growtopia.exe
+    ControlSend,,{D down},ahk_exe Growtopia.exe
+    Sleep 230
+    ControlSend,,{D up},ahk_exe Growtopia.exe
+return
